@@ -27,14 +27,14 @@ function Header(){
         <PortfolioSiteHeader>
           <h1>Portfolios R Us</h1>
         </PortfolioSiteHeader>
-        {/* <ul>
+        <ul>
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/signin">Sign In</Link>
           </li>
-        </ul> */}
+        </ul>
       </React.Fragment>
     </StyledWrapper>
   );

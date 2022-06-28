@@ -14,9 +14,9 @@ const propertiesToUpdate = {
   name: event.target.name.value,
   projects: event.target.projects.value,
   skills: event.target.skills.value,
-  bio: event.target.bio.value,
- };
-    return firestore.update({collection: "portfolio", doc: portfolio.id}, propertiesToUpdate);
+  bio: event.target.bio.value
+ }
+    return firestore.update({collection: 'portfolio', doc: portfolio.id}, propertiesToUpdate);
   }
 
   return (
@@ -28,9 +28,9 @@ const propertiesToUpdate = {
   );
 }
 
-EditPortfolioForm.PropTypes = {
+EditPortfolioForm.propTypes = {
   portfolio: PropTypes.object,
-  onEditTicket: PropTypes.func
+  onEditPortfolio: PropTypes.func
 };
 
 export default EditPortfolioForm;

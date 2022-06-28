@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from "./Header";
 import PortfolioControl from "./PortfolioControl";
 import Signin from "./Signin";
@@ -9,23 +9,19 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // All components returning more than one element must be wrapped in a React.Fragment
 function App(){
 
-
   return ( 
-    
     <React.Fragment>
-      {/* <Router> */}
+      <Router>
         <Header />
-
-        {/* <Switch>
+        <Switch>
         <Route path="/signin">
           <Signin />
         </Route>
         <Route path="/">
-          <PortfolioControl>
+          <PortfolioControl />
         </Route>
-      </Switch> */}
-
-      {/* </Router> */}
+      </Switch>
+      </Router>
     </React.Fragment>
   );
 }

@@ -13,7 +13,7 @@ function Signin(){
     });
   }
 
-  function dosignIn(event) {
+  function doSignIn(event) {
     event.preventDefault();
     const email = event.target.signinEmail.value;
     const password = event.target.signinPassword.value;
@@ -63,5 +63,7 @@ function Signin(){
       <h1>Sign Out</h1>
       <button onClick={doSignOut}>Sign out</button>
     </React.Fragment>
-  )
+  );
 }
+
+export default Signin;

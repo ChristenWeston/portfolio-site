@@ -2,25 +2,29 @@ import React from "react";
 import Portfolio from "./Portfolio";
 import PropTypes from "prop-types";
 import { useSelector } from 'react-redux'
-import { useFirestoreConnect, isLoaded, isEmpty } from 'react-redux-firebase'
+import { useFirestoreConnect, isLoaded } from 'react-redux-firebase'
 
 function PortfolioList(props){
   useFirestoreConnect([
-    { collection: 'portfolios' }
+    { collection: 'portfolio' }
   ]);
 
-  const portfolios = useSelector(state => state.firestore.ordered.portfolios);
+  const portfolios = useSelector(state => state.firestore.ordered.portfolio);
+  console.log(portfolios);
   if (isLoaded(portfolios)) {
     return (
       <React.Fragment>
         <hr />
+        <h1>Hi I am a portfolio list</h1>
         {portfolios.map((portfolio) => {
         return <Portfolio
         whenPortfolioClicked = { props.onPortfolioSelection }
-        name= { props.name}
-        projects = { props.projects}
-        skills = {props.skills}
-        bio = { props.bio }/>
+        name= { portfolio.name}
+        projects = { portfolio.projects}
+        skills = {portfolio.skills}
+        bio = { portfolio.bio }
+        id={portfolio.id} 
+        key={portfolio.id}/>
   })}
       </React.Fragment>
     );

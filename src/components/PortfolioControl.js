@@ -33,6 +33,7 @@ class PortfolioControl extends React.Component {
   handleClick = () => {
     if (this.state.selectedPortfolio != null) {
       this.setState({
+        formVisibleOnPage: false,
         selectedPortfolio: null,
         editing: false
       });
@@ -50,7 +51,7 @@ class PortfolioControl extends React.Component {
   }
 
 handleChangingSelectedPortfolio = (id) => {
-  this.props.firestore.get({collection: 'portfolios', doc: id}).then((portfolio) => {
+  this.props.firestore.get({collection: 'portfolio', doc: id}).then((portfolio) => {
     const firestorePortfolio = {
       name: portfolio.get("name"),
       projects: portfolio.get("projects"),
@@ -63,7 +64,7 @@ handleChangingSelectedPortfolio = (id) => {
 }
 
 handleDeletingPortfolio = (id) => {
-  this.props.firestore.delete({collection: 'portfolios', doc: id});
+  this.props.firestore.delete({collection: 'portfolio', doc: id});
   this.setState({selectedPortfolio: null});
 }
 
@@ -71,7 +72,7 @@ handleEditClick = () => {
   this.setState({editing: true});
 }
 
-handleEditingPortfoliosInList = () => {
+handleEditingPortfolioInList = () => {
   this.setState({
     editing: false,
     selectedPortfolio: null
@@ -79,6 +80,9 @@ handleEditingPortfoliosInList = () => {
 }
 
 render(){
+  let currentlyVisibleState = null;
+  let buttonText = null;
+
     const auth = this.props.firebase.auth();
     if (!isLoaded(auth)) {
       return (
@@ -88,6 +92,7 @@ render(){
       )
     }
     if ((isLoaded(auth)) && (auth.currentUser == null)) {
+      console.log("current user: " + auth.currentUser);
       return (
         <React.Fragment>
           <h1>You must be signed in to access the portfolios.</h1>
@@ -96,17 +101,17 @@ render(){
     }
 
     if ((isLoaded(auth)) && (auth.currentUser != null)) {
-      let currentlyVisibleState = null;
-      let buttonText = null;
-
+      console.log("Current user: " + auth.currentUser);
       if (this.state.editing) {
         currentlyVisibleState = <EditPortfolioForm portfolio = {this.state.selectedPortfolio}
-        onEditPortfolio = {this.handleEditingPortfoliosInList} />
+        onEditPortfolio = {this.handleEditingPortfolioInList} />
         buttonText = "Return to Portfolio List";
       } else if (this.state.selectedPortfolio != null) {
-        currentlyVisibleState = <PortfolioDetail portfolio = {this.state.selectedPortfolio}
-        onClickingDelete = {this.handleDeletingPortfolio}
-        onClickingEdit = {this.handleEditClick} />
+        currentlyVisibleState = 
+        <PortfolioDetail 
+        portfolio ={this.state.selectedPortfolio}
+        onClickingDelete ={this.handleDeletingPortfolio}
+        onClickingEdit ={this.handleEditClick} />
         buttonText = "Return to Portfolio List";
       } else if (this.props.formVisibleOnPage) {
         currentlyVisibleState = <NewPortfolioForm onNewPortfolioCreation={this.handleAddingNewPortfolioToList} />;
@@ -119,7 +124,7 @@ render(){
       return (
         <React.Fragment>
           {currentlyVisibleState}
-          <button onClick = {this.handleClick}>{buttonText}</button>
+          <button onClick={this.handleClick}>{buttonText}</button>
         </React.Fragment>
       );
     }
