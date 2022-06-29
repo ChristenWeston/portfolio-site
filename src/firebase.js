@@ -1,4 +1,4 @@
-// import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import firebase from "firebase/compat/app";
 
 const firebaseConfig = {
@@ -11,5 +11,5 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+firebase.firestore();
 export default firebase;

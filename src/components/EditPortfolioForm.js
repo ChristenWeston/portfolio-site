@@ -8,7 +8,7 @@ function EditPortfolioForm (props) {
   const firestore = useFirestore();
 
   function handleEditPortfolioFormSubmission(event) {
-    event.preventDefalut();
+    event.preventDefault();
     props.onEditPortfolio();
 const propertiesToUpdate = {
   name: event.target.name.value,
