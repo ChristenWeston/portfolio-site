@@ -14,8 +14,10 @@ function PortfolioList(props){
   if (isLoaded(portfolios)) {
     return (
       <React.Fragment>
+        <center>
         <hr />
         <h1>Hi I am a portfolio list</h1>
+        <div className="row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">
         {portfolios.map((portfolio) => {
         return <Portfolio
         whenPortfolioClicked = { props.onPortfolioSelection }
@@ -25,7 +27,9 @@ function PortfolioList(props){
         bio = { portfolio.bio }
         id={portfolio.id} 
         key={portfolio.id}/>
-  })}
+        })}
+        </div>
+        </center>
       </React.Fragment>
     );
   } else {

@@ -1,7 +1,9 @@
 import React from "react";
 import firebase from "firebase/compat";
+import { BrowserRouter as Router, Switch, Route, useHistory } from "react-router-dom";
 
 function Signin(){
+  const history = useHistory();
   function doSignUp(event) {
     event.preventDefault();
     const email = event.target.email.value;
@@ -17,8 +19,9 @@ function Signin(){
     event.preventDefault();
     const email = event.target.signinEmail.value;
     const password = event.target.signinPassword.value;
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(firebaseUser) {
       console.log("Successfully signed in!");
+      history.push("/");
     }).catch(function(error) {
       console.log(error.message);
     })
